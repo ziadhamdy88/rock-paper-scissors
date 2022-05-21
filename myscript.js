@@ -40,14 +40,34 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+function logText(){
+    console.log(playRound(this.textContent, computerPlay()));
+}
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', logText));
+/*buttons.forEach(button => button.addEventListener('click', 
+function(){
+    console.log(playRound(button.textContent, computerPlay()));
+}));*/
+
+const resultsDiv = document.createElement('div');
+
+
 function game(){
-    for(let i=0; i<5; i++){
+    /*for(let i=0; i<5; i++){
         playerSelection = prompt("Enter your choice");
         while(!/^[a-zA-Z]+$/.test(playerSelection)){
             playerSelection = prompt("Please enter either rock, paper or scissors");
         }
         console.log(playRound(playerSelection, computerPlay()));
-    }
+    }*/
 }
+
+
+
+
+
+
 
 game();
