@@ -43,6 +43,9 @@ function playRound(playerSelection, computerSelection){
 function game(){
     for(let i=0; i<5; i++){
         playerSelection = prompt("Enter your choice");
+        while(!/^[a-zA-Z]+$/.test(playerSelection)){
+            playerSelection = prompt("Please enter either rock, paper or scissors");
+        }
         console.log(playRound(playerSelection, computerPlay()));
     }
 }
