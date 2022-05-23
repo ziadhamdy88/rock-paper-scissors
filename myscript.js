@@ -1,7 +1,18 @@
-const CHOICES = ["rock", "paper", "scissors"]
+const CHOICES = ["rock", "paper", "scissors"];
+const resultDiv = document.querySelector("#resultsDiv");
 
 function computerPlay(){
     return CHOICES[Math.floor(Math.random()*(2+1))];
+}
+
+function displayResult(output){
+    resultDiv.animate([{opacity: 0}, {opacity: 1}],
+        {duration: 300,
+        fill: "forwards",
+        iterations: 1,
+        delay: 0,
+        easing: "ease-out"});
+    resultDiv.textContent = output;
 }
 
 function playRound(playerSelection, computerSelection){
@@ -9,39 +20,52 @@ function playRound(playerSelection, computerSelection){
     computerSelection = computerSelection.toLowerCase();
     //console.log(playerSelection, computerSelection);
     
-    switch(playerSelection){
+    if(computerSelection == playerSelection){
+        displayResult("Draw!");
+    }
+    else if((computerSelection == "rock" && playerSelection == "scissors") || 
+            (computerSelection == "scissors" && playerSelection == "paper") ||
+            (computerSelection == "paper" && playerSelection == "rock")
+    ){
+        displayResult("You Lose!");
+    }
+    else{
+        displayResult("You Win!");
+    }
+
+    /*switch(playerSelection){
         case "rock":
             switch(computerSelection){
                 case "rock":
-                    return "Draw!";
+                    displayResult("Draw");
                 case "paper":
-                    return "You Lose! Paper beats Rock";
+                    displayResult("You Lose! Paper beats Rock");
                 case "scissors":
-                    return "You Win! Rock beats Scissors";
+                    displayResult("You Win! Rock beats Scissors");
             }
         case "paper":
             switch(computerSelection){
                 case "rock":
-                    return "You Win! Rock beats Scissors";
+                    displayResult("You Win! Rock beats Scissors");
                 case "paper":
-                    return "Draw!";
+                    displayResult("Draw!");
                 case "scissors":
-                    return "You Lose! Paper beats Rock";
+                    displayResult("You Lose! Paper beats Rock");
             }
         case "scissors":
             switch(computerSelection){
                 case "rock":
-                    return "You Lose! Paper beats Rock";
+                    displayResult("You Lose! Paper beats Rock");
                 case "paper":
-                    return "You Win! Rock beats Scissors";
+                    displayResult("You Win! Rock beats Scissors");
                 case "scissors":
-                    return "Draw!";
+                    displayResult("Draw!");
             }
-    }
+    }*/
 }
 
-function logText(){
-    console.log(playRound(this.textContent, computerPlay()));
+function logText(e){
+    console.log(playRound(e.target.textContent, computerPlay()));
 }
 
 const buttons = document.querySelectorAll('button');
@@ -51,7 +75,6 @@ function(){
     console.log(playRound(button.textContent, computerPlay()));
 }));*/
 
-const resultsDiv = document.createElement('div');
 
 
 function game(){
