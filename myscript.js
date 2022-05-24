@@ -1,5 +1,10 @@
 const CHOICES = ["rock", "paper", "scissors"];
 const resultDiv = document.querySelector("#resultsDiv");
+let computerSelection;
+let playerSelection;
+let computerScore = 0;
+let playerScore = 0;
+
 
 function computerPlay(){
     return CHOICES[Math.floor(Math.random()*(2+1))];
@@ -18,7 +23,6 @@ function displayResult(output){
 function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
-    //console.log(playerSelection, computerSelection);
     
     if(computerSelection == playerSelection){
         displayResult("Draw!");
@@ -26,7 +30,7 @@ function playRound(playerSelection, computerSelection){
     else if((computerSelection == "rock" && playerSelection == "scissors") || 
             (computerSelection == "scissors" && playerSelection == "paper") ||
             (computerSelection == "paper" && playerSelection == "rock")
-    ){
+           ){
         displayResult("You Lose!");
     }
     else{
@@ -64,18 +68,13 @@ function playRound(playerSelection, computerSelection){
     }*/
 }
 
-function logText(e){
-    console.log(playRound(e.target.textContent, computerPlay()));
-}
-
-const buttons = document.querySelectorAll('button');
-buttons.forEach(button => button.addEventListener('click', logText));
-/*buttons.forEach(button => button.addEventListener('click', 
-function(){
-    console.log(playRound(button.textContent, computerPlay()));
-}));*/
-
-
+const buttons = document.querySelectorAll('.button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () =>{
+        const selectedImage = button.querySelector("img");
+        playRound(selectedImage.alt, computerPlay());
+    });
+});
 
 function game(){
     /*for(let i=0; i<5; i++){
@@ -86,11 +85,3 @@ function game(){
         console.log(playRound(playerSelection, computerPlay()));
     }*/
 }
-
-
-
-
-
-
-
-game();

@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    background: #89cff0;
+    color: white;
+    font-family: roboto, arial, sans-serif;
+}
+
+#title,
+#score-container,
+#score-label,
+#main-body {
+    text-align: center;
+}
+
+#title {
+    font-size: 80px;
+}
+
+#main-body {
+    font-size: 40px;
+}
+
+#button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    width: 250px;
+    height: 250px;
+    border: 2px solid white;
+    margin: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#score-label,
+#score-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.label {
+    padding-top: 30px;
+    padding-left: 40px;
+    font-size: 30px;
+}
+
+.score {
+    font-size: 70px;
+}
+
+#results-container {
+    text-align: center;
+    opacity: 0;
+}
