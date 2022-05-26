@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <main id="main-content">
+        <div id="main">
             <h1 id="title">Rock paper scissors</h1>
             <div id="main-body">
                 <p>Choose your weapon!</p>
@@ -25,16 +25,20 @@
                     </div>
                 </div>
                 <div id="score-label">
-                    <p class="label">you</p>
-                    <p class="label">computer</p>
+                    <p class="label">YOU</p>
+                    <p class="label">COMPUTER</p>
                 </div>
                 <div id="score-container">
                     <div id="player-score" class="score">0</div>
                     <div id="computer-score" class="score">0</div>
                 </div>
-                <div id="resultsDiv"></div>
+                <div id="results"></div>
             </div>
-            <script src="./myscript.js"></script>
-        </main>
+        </div>
+        <div id="game-done" class="disappear">
+            <div id="final-result"></div>
+            <div id="play-again" class="disappear"></div>
+        </div>
+        <script src="./myscript.js"></script>
     </body>
 </html>

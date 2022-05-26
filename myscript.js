@@ -1,5 +1,9 @@
 const CHOICES = ["rock", "paper", "scissors"];
-const resultDiv = document.querySelector("#resultsDiv");
+const resultDiv = document.querySelector("#results");
+const gameDone = document.querySelector("#game-done");
+const finalResult = document.querySelector("#final-result");
+const playAgainButton = document.querySelector("#play-again");
+const main = document.querySelector("#main");
 let computerSelection;
 let playerSelection;
 let computerScore = 0;
@@ -31,41 +35,15 @@ function playRound(playerSelection, computerSelection){
             (computerSelection == "scissors" && playerSelection == "paper") ||
             (computerSelection == "paper" && playerSelection == "rock")
            ){
-        displayResult("You Lose!");
+            computerScore++;
+            animateAndKeepScore();
+            displayResult("You Lose!");
     }
     else{
+        playerScore++;
+        animateAndKeepScore();
         displayResult("You Win!");
     }
-
-    /*switch(playerSelection){
-        case "rock":
-            switch(computerSelection){
-                case "rock":
-                    displayResult("Draw");
-                case "paper":
-                    displayResult("You Lose! Paper beats Rock");
-                case "scissors":
-                    displayResult("You Win! Rock beats Scissors");
-            }
-        case "paper":
-            switch(computerSelection){
-                case "rock":
-                    displayResult("You Win! Rock beats Scissors");
-                case "paper":
-                    displayResult("Draw!");
-                case "scissors":
-                    displayResult("You Lose! Paper beats Rock");
-            }
-        case "scissors":
-            switch(computerSelection){
-                case "rock":
-                    displayResult("You Lose! Paper beats Rock");
-                case "paper":
-                    displayResult("You Win! Rock beats Scissors");
-                case "scissors":
-                    displayResult("Draw!");
-            }
-    }*/
 }
 
 const buttons = document.querySelectorAll('.button');
@@ -73,15 +51,62 @@ buttons.forEach((button) => {
     button.addEventListener('click', () =>{
         const selectedImage = button.querySelector("img");
         playRound(selectedImage.alt, computerPlay());
+
+        if(computerScore === 5 || playerScore === 5){
+            gameEnd();
+        }
     });
 });
 
-function game(){
-    /*for(let i=0; i<5; i++){
-        playerSelection = prompt("Enter your choice");
-        while(!/^[a-zA-Z]+$/.test(playerSelection)){
-            playerSelection = prompt("Please enter either rock, paper or scissors");
-        }
-        console.log(playRound(playerSelection, computerPlay()));
-    }*/
+function animateAndKeepScore(){
+    let playerSelector = document.querySelector("#player-score");
+    let computerSelector = document.querySelector("#computer-score");
+
+    if(computerSelector.textContent != computerScore){
+        computerSelector.animate([
+            {opacity: 0}, {opacity: 1},
+             {duration: 300, fill: "forwards", iterations: 1, delay: 0,
+              easing: "ease-out"}]);
+        computerSelector.textContent = computerScore;
+    }
+    if(playerSelector.textContent != playerScore){
+        playerSelector.animate([
+            {opacity: 0}, {opacity: 1},
+             {duration: 300, fill: "forwards", iterations: 1, delay: 0,
+              easing: "ease-out"}]);
+        playerSelector.textContent = playerScore;
+    }
+}
+
+function reset(){
+    resultDiv.textContent = "";
+    playerScore = 0;
+    computerScore = 0;
+    animateAndKeepScore();
+}
+
+function gameEnd(){
+    animations();
+    if(playerScore > computerScore){
+        finalResult.textContent = "You Win!";
+        playAgainButton.textContent = "Play Again";
+    }
+    else{
+        finalResult.textContent = "You Lose!";
+        playAgainButton.textContent = "Try Again?";
+    }
+}
+
+function animations(){
+    finalResult.classList.remove("disappear");
+    main.classList.add("disappear");
+    gameDone.classList.remove("disappear");
+    playAgainButton.classList.remove("disappear");
+    playAgainButton.addEventListener("click", () => {
+        main.classList.remove("disappear");
+        gameDone.classList.add("disappear");
+        playAgainButton.classList.add("disappear");
+        finalResult.classList.add("disappear");
+        reset();
+    });
 }
