@@ -11,7 +11,7 @@ let playerScore = 0;
 
 
 function computerPlay(){
-    return CHOICES[Math.floor(Math.random()*(2+1))];
+    return CHOICES[Math.floor(Math.random()*(CHOICES.length))];
 }
 
 function displayResult(output){
